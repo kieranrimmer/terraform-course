@@ -1,7 +1,17 @@
+
+// Configure the Google Cloud provider
+provider "google" {
+  credentials = "${file("../credentials/tf_cred.json")}"
+  project     = "kr-teraform-01"
+  region      = "australia-southeast1-b"
+}
+
+// Create a new instance
+
 resource "google_compute_instance" "default" {
   name         = "test"
-  machine_type = "${var.MACHINE_TYPE}"
-  zone         = "${var.GOOGLE_REGION}"
+  machine_type = "n1-standard-1"
+  zone         = "australia-southeast1-b"
 
   tags = ["foo", "bar"]
 
