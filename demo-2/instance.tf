@@ -1,5 +1,5 @@
 
-resource "google_compute_address" "default" {
+resource "google_compute_address" "nat-ip-b" {
   name         = "my-external-address"
   address_type = "EXTERNAL"
 }
@@ -25,7 +25,7 @@ resource "google_compute_instance" "default" {
     network = "default"
 
     access_config {
-      // Ephemeral IP
+      nat_ip = "${google_compute_address.nat-ip-b.address}"
     }
   }
 
@@ -50,3 +50,6 @@ resource "google_compute_instance" "default" {
     private_key = "${file("${var.PATH_TO_PRIVATE_KEY}")}"
   }
 }
+output "public_ip" {
+  value = "${google_compute_address.nat-ip-b.address}"
+} 
