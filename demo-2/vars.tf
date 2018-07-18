@@ -1,3 +1,14 @@
+
+resource "random_string" "project" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
+variable "expected_name" {
+  default = "my-external-address"
+}
+
 variable "GOOGLE_PROJECT" {
   default = "kr-teraform-01"
 }

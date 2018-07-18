@@ -5,7 +5,9 @@ resource "google_compute_address" "nat-ip-b" {
 }
 
 resource "google_compute_instance" "default" {
-  name         = "example"
+  name         = "${length(google_compute_address.nat-ip-b.address) == 0 ? 
+                    "example" : 
+                    format("gce-instance-example-%s", random_string.project.result)}"
   machine_type = "${var.MACHINE_TYPE}"
   zone         = "${var.GOOGLE_REGION}-b"
 
